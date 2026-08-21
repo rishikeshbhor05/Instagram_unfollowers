@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Uploaded Instagram data (never commit this — it's personal data)
+uploads/
+*.zip
+
+# OS/editor cruft
+.DS_Store
+.vscode/
+.idea/

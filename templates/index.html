@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Instagram Unfollowers</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="card">
+
+            <h1>Instagram Unfollowers</h1>
+
+            <p class="subtitle">
+                Find out who you follow that doesn't follow you back.
+            </p>
+
+            <form method="POST" enctype="multipart/form-data">
+
+                <label class="upload">
+
+                    <input
+                        type="file"
+                        name="instagram_data"
+                        accept=".zip"
+                        required
+                    >
+
+                    <span>📦 Choose Instagram ZIP</span>
+
+                </label>
+
+                <button type="submit">
+                    Check Unfollowers
+                </button>
+
+            </form>
+
+            {% if error %}
+
+            <div class="error">
+                {{ error }}
+            </div>
+
+            {% endif %}
+
+        </div>
+
+
+        {% if results is defined %}
+
+        <div class="results">
+
+            <div class="stats">
+
+                <div>
+                    <strong>{{ following_count }}</strong>
+                    <span>Following</span>
+                </div>
+
+                <div>
+                    <strong>{{ followers_count }}</strong>
+                    <span>Followers</span>
+                </div>
+
+                <div>
+                    <strong>{{ result_count }}</strong>
+                    <span>Don't follow back</span>
+                </div>
+
+            </div>
+
+
+            <h2>
+                People who don't follow you back
+            </h2>
+
+
+            {% if results %}
+
+            <div class="username-list">
+
+                {% for username in results %}
+
+                <a href="https://www.instagram.com/{{ username }}/" target="_blank" rel="noopener noreferrer" class="username-row">
+                    <span class="handle">@{{ username }}</span>
+                    <span class="unfollow-btn">Unfollow →</span>
+                </a>
+
+                {% endfor %}
+
+            </div>
+
+            {% else %}
+
+            <div class="success">
+                🎉 Everyone you follow follows you back!
+            </div>
+
+            {% endif %}
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>
