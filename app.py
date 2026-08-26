@@ -280,7 +280,10 @@ def index():
 
 
 if __name__ == "__main__":
-    # NOTE: debug=True enables the interactive Werkzeug debugger, which
-    # allows remote code execution if this is ever reachable beyond your
-    # own machine. Turn it off (or read from an env var) before deploying.
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    # debug mode is OFF by default. Only turn it on locally by running:
+    #   FLASK_DEBUG=1 python app.py
+    # Never enable it on a publicly reachable deployment — the Werkzeug
+    # debugger allows remote code execution if left on.
+    debug_mode = os.environ.get("FLASK_DEBUG") == "1"
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=debug_mode)
